@@ -9,7 +9,6 @@ public:
     license-strings:
     - foo license 1
     - foo license (2.0)
-    - foo-foo license
 
 sources:
 - kind: local

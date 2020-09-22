@@ -6,6 +6,7 @@ public:
     license-strings:
     - RD-RD license 1
     - RD-RD license (2.0)
+    - Bar_Baz
 
 sources:
 - kind: local

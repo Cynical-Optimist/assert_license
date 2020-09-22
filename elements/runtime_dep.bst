@@ -10,7 +10,7 @@ public:
   licenses:
     license-strings:
     - RD license 1
-    - RD license (2.0)
+    - RD license (3.0)
 
 sources:
 - kind: local

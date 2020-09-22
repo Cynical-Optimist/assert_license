@@ -1,2 +1,3 @@
 config:
   path: LicenseOutput.txt
+  blacklist: []

@@ -44,9 +44,10 @@ def license_matches(blacklist_entry, license_string):
 
 class AssertLicenseElement(Element):
     def configure(self, node):
-        self.node_validate(node, ["path", "blacklist", "dependency_scope"])
+        self.node_validate(node, ["path", "blacklist", "fail_on_blacklist_match", "dependency_scope"])
         self.path = self.node_subst_member(node, "path")
         self.blacklist = self.node_subst_list(node, "blacklist")
+        self.fail_on_match = self.node_get_member(node, bool, 'fail_on_blacklist_match')
 
         dependency_scope = self.node_subst_member(node, "dependency_scope").lower()
         if dependency_scope == "run":
@@ -72,6 +73,7 @@ class AssertLicenseElement(Element):
             "scope": str(self.dep_scope),
             "path": self.path,
             "blacklist": self.blacklist,
+            "fail_on_match": self.fail_on_match,
         }
 
     def configure_sandbox(self, sandbox):
@@ -113,7 +115,7 @@ class AssertLicenseElement(Element):
                         )
                         blacklist_violations = True
 
-        if blacklist_violations:
+        if blacklist_violations and self.fail_on_match:
             raise ElementError("assert_license element detected a blacklist violation")
 
         basedir = sandbox.get_directory()
